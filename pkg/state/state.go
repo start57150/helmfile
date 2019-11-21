@@ -1,6 +1,8 @@
 package state
 
 import (
+	"bufio"
+	"bytes"
 	"crypto/sha1"
 	"encoding/hex"
 	"errors"
@@ -649,7 +651,25 @@ func (st *HelmState) listReleases(context helmexec.HelmContext, helm helmexec.In
 	if helm.IsHelm3() && release.Namespace != "" {
 		flags = append(flags, "--namespace", release.Namespace)
 	}
-	return helm.List(context, "^"+release.Name+"$", flags...)
+	flags = append(flags, "--all")
+	out, err := helm.List(context, "^"+release.Name+"$", flags...)
+	if err != nil {
+		return out, err
+	}
+
+	return excludeLines(out, "NAME", "DELETED"), nil
+}
+
+func excludeLines(lines, prefix, substr string) string {
+	out := &bytes.Buffer{}
+	scanner := bufio.NewScanner(strings.NewReader(lines))
+	for scanner.Scan() {
+		txt := scanner.Text()
+		if !strings.Contains(txt, substr) && !strings.HasPrefix(txt, prefix) {
+			fmt.Fprintln(out, txt)
+		}
+	}
+	return out.String()
 }
 
 func (st *HelmState) getDeployedVersion(context helmexec.HelmContext, helm helmexec.Interface, release *ReleaseSpec) (string, error) {

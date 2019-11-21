@@ -2149,10 +2149,10 @@ releases:
 			},
 			lists: map[exectest.ListKey]string{
 				// delete frontend-v1 and backend-v1
-				exectest.ListKey{Filter: "^frontend-v1$", Flags: "--kube-contextdefault"}: `NAME	REVISION	UPDATED                 	STATUS  	CHART        	APP VERSION	NAMESPACE
+				exectest.ListKey{Filter: "^frontend-v1$", Flags: "--kube-contextdefault--all"}: `NAME	REVISION	UPDATED                 	STATUS  	CHART        	APP VERSION	NAMESPACE
 frontend-v1 	4       	Fri Nov  1 08:40:07 2019	DEPLOYED	backend-3.1.0	3.1.0      	default
 `,
-				exectest.ListKey{Filter: "^backend-v1$", Flags: "--kube-contextdefault"}: `NAME	REVISION	UPDATED                 	STATUS  	CHART        	APP VERSION	NAMESPACE
+				exectest.ListKey{Filter: "^backend-v1$", Flags: "--kube-contextdefault--all"}: `NAME	REVISION	UPDATED                 	STATUS  	CHART        	APP VERSION	NAMESPACE
 backend-v1 	4       	Fri Nov  1 08:40:07 2019	DEPLOYED	backend-3.1.0	3.1.0      	default
 `,
 			},
@@ -2337,33 +2337,33 @@ processing releases in group 1/5: logging, front-proxy
 worker 1/1 started
 worker 1/1 finished
 worker 1/1 started
-getting deployed release version failed:unexpected list key: {^logging$ --kube-contextdefault}
-getting deployed release version failed:unexpected list key: {^front-proxy$ --kube-contextdefault}
+getting deployed release version failed:unexpected list key: {^logging$ --kube-contextdefault--all}
+getting deployed release version failed:unexpected list key: {^front-proxy$ --kube-contextdefault--all}
 worker 1/1 finished
 processing releases in group 2/5: database, servicemesh
 worker 1/1 started
 worker 1/1 finished
 worker 1/1 started
-getting deployed release version failed:unexpected list key: {^database$ --kube-contextdefault}
-getting deployed release version failed:unexpected list key: {^servicemesh$ --kube-contextdefault}
+getting deployed release version failed:unexpected list key: {^database$ --kube-contextdefault--all}
+getting deployed release version failed:unexpected list key: {^servicemesh$ --kube-contextdefault--all}
 worker 1/1 finished
 processing releases in group 3/5: anotherbackend
 worker 1/1 started
 worker 1/1 finished
 worker 1/1 started
-getting deployed release version failed:unexpected list key: {^anotherbackend$ --kube-contextdefault}
+getting deployed release version failed:unexpected list key: {^anotherbackend$ --kube-contextdefault--all}
 worker 1/1 finished
 processing releases in group 4/5: backend-v1, backend-v2
 worker 1/1 started
 worker 1/1 finished
 worker 1/1 started
-getting deployed release version failed:unexpected list key: {^backend-v2$ --kube-contextdefault}
+getting deployed release version failed:unexpected list key: {^backend-v2$ --kube-contextdefault--all}
 worker 1/1 finished
 processing releases in group 5/5: frontend-v1, frontend-v2, frontend-v3
 worker 1/1 started
 worker 1/1 finished
 worker 1/1 started
-getting deployed release version failed:unexpected list key: {^frontend-v3$ --kube-contextdefault}
+getting deployed release version failed:unexpected list key: {^frontend-v3$ --kube-contextdefault--all}
 worker 1/1 finished
 
 UPDATED RELEASES:
@@ -2405,8 +2405,8 @@ releases:
 				exectest.DiffKey{Name: "bar", Chart: "mychart2", Flags: "--kube-contextdefault--detailed-exitcode"}: nil,
 			},
 			lists: map[exectest.ListKey]string{
-				exectest.ListKey{Filter: "^foo$", Flags: "--kube-contextdefault"}: ``,
-				exectest.ListKey{Filter: "^bar$", Flags: "--kube-contextdefault"}: `NAME	REVISION	UPDATED                 	STATUS  	CHART        	APP VERSION	NAMESPACE
+				exectest.ListKey{Filter: "^foo$", Flags: "--kube-contextdefault--all"}: ``,
+				exectest.ListKey{Filter: "^bar$", Flags: "--kube-contextdefault--all"}: `NAME	REVISION	UPDATED                 	STATUS  	CHART        	APP VERSION	NAMESPACE
 bar 	4       	Fri Nov  1 08:40:07 2019	DEPLOYED	mychart2-3.1.0	3.1.0      	default
 `,
 			},
@@ -2498,14 +2498,14 @@ processing releases in group 1/2: baz, bar
 worker 1/1 started
 worker 1/1 finished
 worker 1/1 started
-getting deployed release version failed:unexpected list key: {^baz$ --kube-contextdefault}
-getting deployed release version failed:unexpected list key: {^bar$ --kube-contextdefault}
+getting deployed release version failed:unexpected list key: {^baz$ --kube-contextdefault--all}
+getting deployed release version failed:unexpected list key: {^bar$ --kube-contextdefault--all}
 worker 1/1 finished
 processing releases in group 2/2: foo
 worker 1/1 started
 worker 1/1 finished
 worker 1/1 started
-getting deployed release version failed:unexpected list key: {^foo$ --kube-contextdefault}
+getting deployed release version failed:unexpected list key: {^foo$ --kube-contextdefault--all}
 worker 1/1 finished
 
 UPDATED RELEASES:
@@ -2775,13 +2775,13 @@ processing releases in group 1/2: tns1/ns1/foo
 worker 1/1 started
 worker 1/1 finished
 worker 1/1 started
-getting deployed release version failed:unexpected list key: {^foo$ --tiller-namespacetns1--kube-contextdefault}
+getting deployed release version failed:unexpected list key: {^foo$ --tiller-namespacetns1--kube-contextdefault--all}
 worker 1/1 finished
 processing releases in group 2/2: tns2/ns2/bar
 worker 1/1 started
 worker 1/1 finished
 worker 1/1 started
-getting deployed release version failed:unexpected list key: {^bar$ --tiller-namespacetns2--kube-contextdefault}
+getting deployed release version failed:unexpected list key: {^bar$ --tiller-namespacetns2--kube-contextdefault--all}
 worker 1/1 finished
 
 UPDATED RELEASES:
@@ -2815,10 +2815,10 @@ releases:
 				exectest.DiffKey{Name: "foo", Chart: "mychart1", Flags: "--kube-contextdefault--detailed-exitcode"}: helmexec.ExitError{Code: 2},
 			},
 			lists: map[exectest.ListKey]string{
-				exectest.ListKey{Filter: "^foo$", Flags: "--kube-contextdefault"}: `NAME	REVISION	UPDATED                 	STATUS  	CHART        	APP VERSION	NAMESPACE
+				exectest.ListKey{Filter: "^foo$", Flags: "--kube-contextdefault--all"}: `NAME	REVISION	UPDATED                 	STATUS  	CHART        	APP VERSION	NAMESPACE
 foo 	4       	Fri Nov  1 08:40:07 2019	DEPLOYED	mychart1-3.1.0	3.1.0      	default
 `,
-				exectest.ListKey{Filter: "^bar$", Flags: "--kube-contextdefault"}: `NAME	REVISION	UPDATED                 	STATUS  	CHART        	APP VERSION	NAMESPACE
+				exectest.ListKey{Filter: "^bar$", Flags: "--kube-contextdefault--all"}: `NAME	REVISION	UPDATED                 	STATUS  	CHART        	APP VERSION	NAMESPACE
 bar 	4       	Fri Nov  1 08:40:07 2019	DEPLOYED	mychart2-3.1.0	3.1.0      	default
 `,
 			},
@@ -2848,10 +2848,10 @@ releases:
 				exectest.DiffKey{Name: "foo", Chart: "mychart1", Flags: "--kube-contextdefault--detailed-exitcode"}: helmexec.ExitError{Code: 2},
 			},
 			lists: map[exectest.ListKey]string{
-				exectest.ListKey{Filter: "^foo$", Flags: "--kube-contextdefault"}: `NAME	REVISION	UPDATED                 	STATUS  	CHART        	APP VERSION	NAMESPACE
+				exectest.ListKey{Filter: "^foo$", Flags: "--kube-contextdefault--all"}: `NAME	REVISION	UPDATED                 	STATUS  	CHART        	APP VERSION	NAMESPACE
 foo 	4       	Fri Nov  1 08:40:07 2019	DEPLOYED	mychart1-3.1.0	3.1.0      	default
 `,
-				exectest.ListKey{Filter: "^bar$", Flags: "--kube-contextdefault"}: `NAME	REVISION	UPDATED                 	STATUS  	CHART        	APP VERSION	NAMESPACE
+				exectest.ListKey{Filter: "^bar$", Flags: "--kube-contextdefault--all"}: `NAME	REVISION	UPDATED                 	STATUS  	CHART        	APP VERSION	NAMESPACE
 bar 	4       	Fri Nov  1 08:40:07 2019	DEPLOYED	mychart2-3.1.0	3.1.0      	default
 `,
 			},
@@ -2883,10 +2883,10 @@ releases:
 				exectest.DiffKey{Name: "foo", Chart: "mychart1", Flags: "--kube-contextdefault--detailed-exitcode"}: helmexec.ExitError{Code: 2},
 			},
 			lists: map[exectest.ListKey]string{
-				exectest.ListKey{Filter: "^foo$", Flags: "--kube-contextdefault"}: `NAME	REVISION	UPDATED                 	STATUS  	CHART        	APP VERSION	NAMESPACE
+				exectest.ListKey{Filter: "^foo$", Flags: "--kube-contextdefault--all"}: `NAME	REVISION	UPDATED                 	STATUS  	CHART        	APP VERSION	NAMESPACE
 foo 	4       	Fri Nov  1 08:40:07 2019	DEPLOYED	mychart1-3.1.0	3.1.0      	default
 `,
-				exectest.ListKey{Filter: "^bar$", Flags: "--kube-contextdefault"}: `NAME	REVISION	UPDATED                 	STATUS  	CHART        	APP VERSION	NAMESPACE
+				exectest.ListKey{Filter: "^bar$", Flags: "--kube-contextdefault--all"}: `NAME	REVISION	UPDATED                 	STATUS  	CHART        	APP VERSION	NAMESPACE
 bar 	4       	Fri Nov  1 08:40:07 2019	DEPLOYED	mychart2-3.1.0	3.1.0      	default
 `,
 			},
@@ -2917,10 +2917,10 @@ releases:
 				exectest.DiffKey{Name: "foo", Chart: "mychart1", Flags: "--kube-contextdefault--detailed-exitcode"}: helmexec.ExitError{Code: 2},
 			},
 			lists: map[exectest.ListKey]string{
-				exectest.ListKey{Filter: "^foo$", Flags: "--kube-contextdefault"}: `NAME	REVISION	UPDATED                 	STATUS  	CHART        	APP VERSION	NAMESPACE
+				exectest.ListKey{Filter: "^foo$", Flags: "--kube-contextdefault--all"}: `NAME	REVISION	UPDATED                 	STATUS  	CHART        	APP VERSION	NAMESPACE
 foo 	4       	Fri Nov  1 08:40:07 2019	DEPLOYED	mychart1-3.1.0	3.1.0      	default
 `,
-				exectest.ListKey{Filter: "^bar$", Flags: "--kube-contextdefault"}: `NAME	REVISION	UPDATED                 	STATUS  	CHART        	APP VERSION	NAMESPACE
+				exectest.ListKey{Filter: "^bar$", Flags: "--kube-contextdefault--all"}: `NAME	REVISION	UPDATED                 	STATUS  	CHART        	APP VERSION	NAMESPACE
 bar 	4       	Fri Nov  1 08:40:07 2019	DEPLOYED	mychart2-3.1.0	3.1.0      	default
 `,
 			},
@@ -2951,10 +2951,10 @@ releases:
 				exectest.DiffKey{Name: "foo", Chart: "mychart1", Flags: "--kube-contextdefault--detailed-exitcode"}: helmexec.ExitError{Code: 2},
 			},
 			lists: map[exectest.ListKey]string{
-				exectest.ListKey{Filter: "^foo$", Flags: "--kube-contextdefault"}: `NAME	REVISION	UPDATED                 	STATUS  	CHART        	APP VERSION	NAMESPACE
+				exectest.ListKey{Filter: "^foo$", Flags: "--kube-contextdefault--all"}: `NAME	REVISION	UPDATED                 	STATUS  	CHART        	APP VERSION	NAMESPACE
 foo 	4       	Fri Nov  1 08:40:07 2019	DEPLOYED	mychart1-3.1.0	3.1.0      	default
 `,
-				exectest.ListKey{Filter: "^bar$", Flags: "--kube-contextdefault"}: `NAME	REVISION	UPDATED                 	STATUS  	CHART        	APP VERSION	NAMESPACE
+				exectest.ListKey{Filter: "^bar$", Flags: "--kube-contextdefault--all"}: `NAME	REVISION	UPDATED                 	STATUS  	CHART        	APP VERSION	NAMESPACE
 bar 	4       	Fri Nov  1 08:40:07 2019	DEPLOYED	mychart2-3.1.0	3.1.0      	default
 `,
 			},
@@ -2985,10 +2985,10 @@ releases:
 				exectest.DiffKey{Name: "foo", Chart: "mychart1", Flags: "--kube-contextdefault--detailed-exitcode"}: helmexec.ExitError{Code: 2},
 			},
 			lists: map[exectest.ListKey]string{
-				exectest.ListKey{Filter: "^foo$", Flags: "--kube-contextdefault"}: `NAME	REVISION	UPDATED                 	STATUS  	CHART        	APP VERSION	NAMESPACE
+				exectest.ListKey{Filter: "^foo$", Flags: "--kube-contextdefault--all"}: `NAME	REVISION	UPDATED                 	STATUS  	CHART        	APP VERSION	NAMESPACE
 foo 	4       	Fri Nov  1 08:40:07 2019	DEPLOYED	mychart1-3.1.0	3.1.0      	default
 `,
-				exectest.ListKey{Filter: "^bar$", Flags: "--kube-contextdefault"}: `NAME	REVISION	UPDATED                 	STATUS  	CHART        	APP VERSION	NAMESPACE
+				exectest.ListKey{Filter: "^bar$", Flags: "--kube-contextdefault--all"}: `NAME	REVISION	UPDATED                 	STATUS  	CHART        	APP VERSION	NAMESPACE
 bar 	4       	Fri Nov  1 08:40:07 2019	DEPLOYED	mychart2-3.1.0	3.1.0      	default
 `,
 			},
@@ -3127,7 +3127,7 @@ processing releases in group 2/3: default/external-secrets
 worker 1/1 started
 worker 1/1 finished
 worker 1/1 started
-getting deployed release version failed:unexpected list key: {^external-secrets$ --kube-contextdefault}
+getting deployed release version failed:unexpected list key: {^external-secrets$ --kube-contextdefault--all}
 worker 1/1 finished
 processing releases in group 3/3: default/my-release
 1 release(s) matching app=test found in helmfile.yaml
@@ -3135,7 +3135,7 @@ processing releases in group 3/3: default/my-release
 worker 1/1 started
 worker 1/1 finished
 worker 1/1 started
-getting deployed release version failed:unexpected list key: {^my-release$ --kube-contextdefault}
+getting deployed release version failed:unexpected list key: {^my-release$ --kube-contextdefault--all}
 worker 1/1 finished
 
 UPDATED RELEASES:
